@@ -1,0 +1,24 @@
+1. buatlah sebuah program yang meminta input 1 karakter.
+program kemudian akan mencetak: karakter yang diinputkan,
+kode ASCII karakter tersebut dalam representasi biner dan
+jumlah bit 1 dari representasi biner tersebut.
+contoh:
+	input: a
+	output: a-0110 0001-3
+
+2. buat program untuk melakukan penjumlahan dua bilangan
+yang masing-masing minimal 5 digit.
+contoh:
+	bilangan 1:12345
+	bilangan 2:56789
+	Hasilnya :68134
+
+3. pada layer muncul tampilan isian sebagai berikut:
+	nrp	: maksimum 9 digit
+	nama	: maksimum 20 digit
+	Telepon/hp : maksimum 12 digit
+		data benar?(y/n)
+setelah selesai mengisikan data, jika tampilan data benar?(ditekan n)
+maka isikan isian lagi, jika(ditekan y) maka tampilkan data yang diisikan,
+misal seperti berikut ini:
+123450001	Alibaba Hari Suwer	072123456789

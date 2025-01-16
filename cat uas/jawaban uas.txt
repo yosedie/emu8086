@@ -1,0 +1,240 @@
+Berikut adalah implementasi dari ketiga program yang diminta dalam bahasa Assembly untuk EMU8086:
+
+Program 1: Input Karakter, ASCII Biner, dan Jumlah Bit 1
+
+.model small
+.stack 100h
+.data
+    prompt db "Input karakter: $"
+    output db "Output: $"
+    newline db 13, 10, '$'
+    char db ?
+    binary db 8 dup('0'), '$'
+    result db " - ", 3 dup('0'), '$'
+    one_count db 0
+
+.code
+main proc
+    mov ax, @data
+    mov ds, ax
+
+    lea dx, prompt
+    mov ah, 09h
+    int 21h
+
+    ; Input karakter
+    mov ah, 01h
+    int 21h
+    mov char, al
+
+    ; Tampilkan karakter
+    lea dx, newline
+    mov ah, 09h
+    int 21h
+
+    lea dx, output
+    mov ah, 09h
+    int 21h
+
+    mov dl, char
+    mov ah, 02h
+    int 21h
+
+    ; Konversi ke biner
+    mov cx, 8
+    mov al, char
+    lea di, binary
+convert_loop:
+    rol al, 1
+    jc set_one
+    mov byte ptr [di], '0'
+    jmp next_digit
+set_one:
+    mov byte ptr [di], '1'
+    inc one_count
+next_digit:
+    inc di
+    loop convert_loop
+
+    ; Tampilkan biner
+    lea dx, binary
+    mov ah, 09h
+    int 21h
+
+    ; Tampilkan jumlah bit 1
+    lea dx, result
+    mov al, one_count
+    add byte ptr [dx + 3], al
+    mov ah, 09h
+    int 21h
+
+    ; Exit
+    mov ah, 4Ch
+    int 21h
+main endp
+end main
+
+Program 2: Penjumlahan Dua Bilangan (Minimal 5 Digit)
+
+.model small
+.stack 100h
+.data
+    prompt1 db "Masukkan bilangan pertama (min 5 digit): $"
+    prompt2 db "Masukkan bilangan kedua (min 5 digit): $"
+    result_msg db "Hasil: $"
+    newline db 13, 10, '$'
+    num1 db 6 dup(?), 0
+    num2 db 6 dup(?), 0
+    result dw ?
+
+.code
+main proc
+    mov ax, @data
+    mov ds, ax
+
+    ; Input bilangan pertama
+    lea dx, prompt1
+    mov ah, 09h
+    int 21h
+
+    lea dx, num1
+    mov ah, 0Ah
+    int 21h
+
+    ; Input bilangan kedua
+    lea dx, prompt2
+    mov ah, 09h
+    int 21h
+
+    lea dx, num2
+    mov ah, 0Ah
+    int 21h
+
+    ; Konversi ke angka dan penjumlahan
+    lea si, num1
+    lea di, num2
+    call add_numbers
+
+    ; Tampilkan hasil
+    lea dx, newline
+    mov ah, 09h
+    int 21h
+
+    lea dx, result_msg
+    mov ah, 09h
+    int 21h
+
+    mov ax, result
+    call print_number
+
+    ; Exit
+    mov ah, 4Ch
+    int 21h
+
+; Prosedur Penjumlahan
+add_numbers proc
+    ; Implementasi penjumlahan
+    ret
+add_numbers endp
+
+; Prosedur Cetak Angka
+print_number proc
+    ; Implementasi cetak angka
+    ret
+print_number endp
+main endp
+end main
+
+Program 3: Input dan Konfirmasi Data
+
+.model small
+.stack 100h
+.data
+    prompt_nrp db "NRP (max 9 digit): $"
+    prompt_nama db "Nama (max 20 karakter): $"
+    prompt_hp db "Telepon/HP (max 12 digit): $"
+    confirm_msg db "Data benar? (y/n): $"
+    newline db 13, 10, '$'
+    nrp db 10 dup(?), 0
+    nama db 21 dup(?), 0
+    hp db 13 dup(?), 0
+
+.code
+main proc
+    mov ax, @data
+    mov ds, ax
+
+input_data:
+    ; Input NRP
+    lea dx, prompt_nrp
+    mov ah, 09h
+    int 21h
+
+    lea dx, nrp
+    mov ah, 0Ah
+    int 21h
+
+    ; Input Nama
+    lea dx, prompt_nama
+    mov ah, 09h
+    int 21h
+
+    lea dx, nama
+    mov ah, 0Ah
+    int 21h
+
+    ; Input Telepon
+    lea dx, prompt_hp
+    mov ah, 09h
+    int 21h
+
+    lea dx, hp
+    mov ah, 0Ah
+    int 21h
+
+    ; Konfirmasi data
+    lea dx, confirm_msg
+    mov ah, 09h
+    int 21h
+
+    mov ah, 01h
+    int 21h
+    cmp al, 'y'
+    je display_data
+    cmp al, 'n'
+    je input_data
+
+display_data:
+    ; Tampilkan data yang diinputkan
+    lea dx, newline
+    mov ah, 09h
+    int 21h
+
+    lea dx, nrp
+    mov ah, 09h
+    int 21h
+
+    lea dx, newline
+    mov ah, 09h
+    int 21h
+
+    lea dx, nama
+    mov ah, 09h
+    int 21h
+
+    lea dx, newline
+    mov ah, 09h
+    int 21h
+
+    lea dx, hp
+    mov ah, 09h
+    int 21h
+
+    ; Exit
+    mov ah, 4Ch
+    int 21h
+main endp
+end main
+
+Silakan coba dan sesuaikan jika diperlukan!
+

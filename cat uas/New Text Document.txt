@@ -1,0 +1,13 @@
+nomor 1:
+INT 21h, AH=09h - 
+address: 07227
+byte 24h not found after 2000 bytes.
+; correct example of INT 21h/9h:
+mov dx, offset msg
+mov ah, 9
+int 21h
+ret
+msg db "Hello$"
+nomor 2:
+(41) wrong parameters: IMUL  ax, 10
+(41) should be a register or a memory location.
