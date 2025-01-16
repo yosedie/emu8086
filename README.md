@@ -1,2 +1,4 @@
 # emu8086
- just to get Pair Extraordinaire
+Computer Architecture and Organization
+
+im making this repo just to get Pair Extraordinaire
